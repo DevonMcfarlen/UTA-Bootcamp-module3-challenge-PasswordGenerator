@@ -1,5 +1,4 @@
 // Assignment code here
-
 function returnCapLetters(){
   return String.fromCharCode(Math.floor(Math.random() * 25) + 65);
 }
@@ -48,7 +47,6 @@ function generatePassword(password){
       alert("Please select an option");
   }
   
-  
   var howLong = null;
 
   while(howLong === null){
@@ -86,7 +84,6 @@ function writePassword() {
   var passwordText = document.querySelector("#password");
 
   passwordText.value = password + "";
-
 }
 
 // Add event listener to generate button
