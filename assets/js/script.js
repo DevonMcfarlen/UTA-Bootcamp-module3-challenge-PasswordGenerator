@@ -1,7 +1,6 @@
 // Assignment code here
 
 function returnCapLetters(){
-  console.log(String.fromCharCode(Math.floor(Math.random() * 25) + 65));
   return String.fromCharCode(Math.floor(Math.random() * 25) + 65);
 }
 
@@ -23,11 +22,55 @@ function returnSpecChars(){
   else if(charCode > 96 && charCode < 123)
     charCode = 123;
 
-  console.log(String.fromCharCode(charCode));
-
   return String.fromCharCode(charCode);
 }
 
+function generatePassword(password){
+  password = "";
+
+  var doCap = confirm("Would you like Upper Case Letters?\n Ok for Yes, Cancel for No");
+  var doLower = confirm("Would you like Lower Case Letters?\n Ok for Yes, Cancel for No");
+  var doNum = confirm("Would you like Numbers?\n Ok for Yes, Cancel for No");
+  var doSpec = confirm("Would you like Special Characters?\n Ok for Yes, Cancel for No");
+  
+  var howLong = null;
+
+  while(howLong === null){
+    var hl = prompt("How long would you like your password?\n please input a number from 8 to 128");
+    if(hl < 8 || hl > 128)
+      alert("Please enter a number from 8 to 128");
+    else 
+      howLong = hl;
+  }
+
+  var funcToCall = [];
+
+  if(doCap)
+    funcToCall.unshift("C");
+  if(doLower)
+    funcToCall.unshift("L");
+  if(doNum)
+    funcToCall.unshift("N");
+  if(doSpec)
+    funcToCall.unshift("S");
+
+  var rand;
+
+  for(var i = 0; i < howLong; i++){
+    rand = Math.floor(Math.random()*(funcToCall.length)+1);
+
+    if(funcToCall[rand-1] === "C")
+      password += returnCapLetters();
+    else if(funcToCall[rand-1] === "L")
+      password += returnLowLetters();
+    else if(funcToCall[rand-1] === "N")
+      password += returnNum() + "";
+    else if(funcToCall[rand-1] === "S")
+      password += returnSpecChars();
+  }
+
+  return password;
+}
 
 // Get references to the #generate element
 var generateBtn = document.querySelector("#generate");
@@ -37,8 +80,7 @@ function writePassword() {
   var password = generatePassword();
   var passwordText = document.querySelector("#password");
 
-  console.log(password);
-  passwordText.value = password;
+  passwordText.value = password + "";
 
 }
 
