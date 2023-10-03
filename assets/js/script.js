@@ -27,11 +27,27 @@ function returnSpecChars(){
 
 function generatePassword(password){
   password = "";
+  var funcToCall = [];
 
-  var doCap = confirm("Would you like Upper Case Letters?\n Ok for Yes, Cancel for No");
-  var doLower = confirm("Would you like Lower Case Letters?\n Ok for Yes, Cancel for No");
-  var doNum = confirm("Would you like Numbers?\n Ok for Yes, Cancel for No");
-  var doSpec = confirm("Would you like Special Characters?\n Ok for Yes, Cancel for No");
+  while(funcToCall[0] === undefined){
+    var doCap = confirm("Would you like Upper Case Letters?\n Ok for Yes, Cancel for No");
+    var doLower = confirm("Would you like Lower Case Letters?\n Ok for Yes, Cancel for No");
+    var doNum = confirm("Would you like Numbers?\n Ok for Yes, Cancel for No");
+    var doSpec = confirm("Would you like Special Characters?\n Ok for Yes, Cancel for No");
+
+    if(doCap)
+      funcToCall.unshift("C");
+    if(doLower)
+      funcToCall.unshift("L");
+    if(doNum)
+      funcToCall.unshift("N");
+    if(doSpec)
+      funcToCall.unshift("S");
+
+    if(funcToCall[0] === undefined)
+      alert("Please select an option");
+  }
+  
   
   var howLong = null;
 
@@ -42,17 +58,6 @@ function generatePassword(password){
     else 
       howLong = hl;
   }
-
-  var funcToCall = [];
-
-  if(doCap)
-    funcToCall.unshift("C");
-  if(doLower)
-    funcToCall.unshift("L");
-  if(doNum)
-    funcToCall.unshift("N");
-  if(doSpec)
-    funcToCall.unshift("S");
 
   var rand;
 
